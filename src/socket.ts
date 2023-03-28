@@ -1,4 +1,6 @@
 import { Socket } from "socket.io";
+import { Player } from "./Player";
+import { Tournament } from "./tournament";
 
 module.exports = function(server: any){
 
@@ -6,6 +8,13 @@ module.exports = function(server: any){
 
     io.sockets.on('connection', function(socket: Socket) {
 
+
+        socket.on('createTournament', function(data) {
+
+                const player = newPlayer(data.playerName, socket)
+                const tournament = new Tournament(0, data.tournamentName, [player], [], player)
+
+        })
 
         socket.on('joinTournament', function(data) {
             
@@ -23,6 +32,16 @@ module.exports = function(server: any){
 
     return io;
 };
+
+
+
+function joinTournament(tournament: Tournament, player: Player) {
+    tournament.players.push(player)
+}
+
+function newPlayer(name: String, socket: Socket) {
+    return new Player(name, socket, 0)
+}
 
 /*
     EMIT :

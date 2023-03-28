@@ -1,17 +1,18 @@
-import Game from "./game"
-import Participant from "./Participant"
+import Game from "./game";
+import { Player } from "./Player";
 
-export default class Tournament {
+export class Tournament {
+  id: Number
+  name: String
+  players: Player[]
+  game: Game[]
+  admin: Player
 
-    protected id: Number
-    protected participants: Participant[]
-    protected game: Game[]
-    protected admin: Participant
-
-    constructor(id: Number, participants: Participant[], game: Game[], admin: Participant) {
-        this.id = id
-        this.participants = participants
-        this.game = game
-        this.admin = admin
-    }
+  constructor(id: Number, name: String, players: Player[], game: Game[], admin: Player) {
+    this.id = id
+    this.name = name
+    this.players = players
+    this.game = game
+    this.admin = admin
+  }
 }

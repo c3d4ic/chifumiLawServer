@@ -1,14 +1,14 @@
-import Participant from "./Participant"
+import { Player } from "./Player"
 
 export default class Game {
 
-    protected participant1: Participant
-    protected participant2: Participant
+    protected Player1: Player
+    protected Player2: Player
     protected round: Number
 
-    constructor(participant1: Participant, participant2: Participant, round: Number) {
-        this.participant1 = participant1
-        this.participant2 = participant2
+    constructor(Player1: Player, Player2: Player, round: Number) {
+        this.Player1 = Player1
+        this.Player2 = Player2
         this.round = round
     }
 }
