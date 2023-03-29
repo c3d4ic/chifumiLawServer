@@ -1,5 +1,6 @@
 
 require('dotenv').config();
+var morgan = require('morgan')
 
 var express = require('express')
 var app = express()
@@ -14,13 +15,15 @@ import { Server, Socket } from "socket.io";
 import { Player } from "./player";
 import { Tournament } from "./tournament";
 
+import tournamentRoutes from "./routes/tournamentRoutes"
+import playerRoutes from "./routes/playerRoutes"
+
 const io = new Server(http, {
     cors: {
         origin: "*",
     }
 })
 
-const { setTournament } = require('./controllers/tournament.controller')
 
 
 const PORT = process.env.PORT;
@@ -36,10 +39,15 @@ app.use(function (req: Request, res: any, next: any) {
 });
 
 
+app.use(morgan('combined'))
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
+
+app.use("/tournament", tournamentRoutes );
+app.use("/player", playerRoutes );
+
 
 app.use((req: any, res: any, next: any) => {
     const error = new Error('Not found');
@@ -55,6 +63,8 @@ app.use((err: any, req: any, res: any, next: any) => {
 });
 
 
+
+
 http.listen(PORT, function () {
     console.log(`App listening at http://localhost:${PORT}`);
 });
@@ -64,7 +74,6 @@ io.sockets.on('connection', function (socket: Socket) {
 
     console.log("Nouveau socket connection : ", socket.conn['id']);
     
-    socket.on('test', setTournament)
     
     socket.on('createTournament', function (data) {
 
