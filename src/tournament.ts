@@ -1,5 +1,5 @@
 import Game from "./game";
-import { Player } from "./Player";
+import { Player } from "./player";
 
 export class Tournament {
   id: Number

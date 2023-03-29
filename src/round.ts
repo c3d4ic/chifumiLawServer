@@ -1,5 +1,5 @@
-import { Player } from "./Player";
 import { gameAction } from "./enums";
+import { Player } from "./player";
 
 export class Round {
 

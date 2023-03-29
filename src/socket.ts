@@ -1,37 +1,56 @@
 import { Socket } from "socket.io";
-import { Player } from "./Player";
+import { Player } from "./player";
 import { Tournament } from "./tournament";
 
-module.exports = function(server: any){
-
-    var io = require("socket.io").listen(server);
-
-    io.sockets.on('connection', function(socket: Socket) {
+import { Server } from "socket.io";
 
 
-        socket.on('createTournament', function(data) {
 
-                const player = newPlayer(data.playerName, socket)
-                const tournament = new Tournament(0, data.tournamentName, [player], [], player)
 
-        })
+var socketio = require('socket.io')
 
-        socket.on('joinTournament', function(data) {
+module.exports.listen = function(app: any){
+    const io = new Server({ /* options */ });
+
+    io.on("connection", (socket: Socket) => {
+        console.log("Socket: ", socket)
+      });
+      
+    
+
+    return io
+}
+
+// module.exports = function(server: any){
+
+//     var io = require("socket.io").listen(server);
+
+//     io.sockets.on('connection', function(socket: Socket) {
+
+
+//         socket.on('createTournament', function(data) {
+
+//                 const player = newPlayer(data.playerName, socket)
+//                 const tournament = new Tournament(0, data.tournamentName, [player], [], player)
+
+//         })
+
+//         socket.on('joinTournament', function(data) {
             
-        })
+//         })
 
-        socket.on('startTournament', function(data) {
+//         socket.on('startTournament', function(data) {
             
-        })
+//         })
 
-        socket.on('actionPlayer', function(data) {
+//         socket.on('actionPlayer', function(data) {
             
-        })
+//         })
 
-    });
+//     });
 
-    return io;
-};
+//     return io;
+// };
 
 
 
