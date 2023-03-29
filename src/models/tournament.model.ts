@@ -9,14 +9,13 @@ const tournamentSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        players: [{type: mongoose.Schema.Types.ObjectId, ref: 'Player'}],
-        // "admin" : Player
-
+        players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }],
+        admin: { type: mongoose.Schema.Types.ObjectId, ref: 'Player', required: true },
     },
     {
         timestamps: true
     }
 )
 
-const Tournament = mongoose.model('Tournament',tournamentSchema)
+const Tournament = mongoose.model('Tournament', tournamentSchema)
 export default Tournament

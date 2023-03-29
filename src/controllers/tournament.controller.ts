@@ -1,30 +1,50 @@
 import Player from "../models/player.model"
+import Tournament from "../models/tournament.model"
 
-const TournamentModel = require('../models/tournament.model')
-
-
-
-// module.exports.getTournament = async (req: any, res: any) => {
-//     const tournament = await TournamentModel.find()
-    
-// }
-
-
-export const setTournament = async(req: any, res: any) => {
+export const getTournament = async (req: any, res: any) => {
     try {
-        const playerId = req.body
+        const tournaments = await Tournament.find()
+
+        res.status(200).json(tournaments)
+
+    } catch (err: any) {
+        res.status(500).json({ error: err.message })
+    }
+}
+
+export const setTournament = async (req: any, res: any) => {
+    try {
+        const { name, playerId } = req.body
+
         const player = await Player.findById(playerId)
 
-        const tournament = await TournamentModel.create({
-            name: "toto",
-            players: player
+        const tournament = await Tournament.create({
+            name: name,
+            players: [player],
+            admin: player
         })
-
-        console.log("TOURNAMENT : ", tournament)
 
         res.status(200).json(tournament)
 
-    } catch(err: any) {
-        res.status(500).json({error: err.message})
+    } catch (err: any) {
+        res.status(500).json({ error: err.message })
+    }
+}
+
+export const addPlayerInTournament = async (req: any, res: any) => {
+    try {
+        const { playerId, tournamentId } = req.body
+        const player = await Player.findById(playerId)
+
+        const tournament = await Tournament.updateOne(
+            { _id : tournamentId },
+            { $push : { players : player } },
+
+        )
+
+        res.status(200).json(tournament)
+
+    } catch (err: any) {
+        res.status(500).json({ error: err.message })
     }
 }
