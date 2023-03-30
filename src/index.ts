@@ -109,6 +109,14 @@ function newPlayer(name: String, socket: Socket) {
     return new Player(name, socket, 0)
 }
 
+function calculateRound() {
+    // let players : any = [];
+    // for(let i=0; i<= players.length-1; i++) {
+    //     for(let j=0; j<= players.length-1; j++) {
+    //         if(players[i].ID != players[j].ID && ne combate pas déja)
+    //     }
+    // }
+}
 /*
     EMIT :
 
