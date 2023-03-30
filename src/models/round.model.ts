@@ -4,14 +4,8 @@ const mongoose = require('mongoose');
 
 const roundSchema = mongoose.Schema(
     {
-        "actionP1": {
-            type: Number,
-            required: true
-        },
-        "actionP2": {
-            type: Number,
-            required: true
-        }
+        player: { type: mongoose.Schema.Types.ObjectId, ref: 'Player', required: true },
+        actions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Action', required: true },]
     },
 )
 

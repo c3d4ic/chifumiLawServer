@@ -11,6 +11,7 @@ const tournamentSchema = mongoose.Schema(
         },
         players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }],
         admin: { type: mongoose.Schema.Types.ObjectId, ref: 'Player', required: true },
+        games: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Game' }],
     },
     {
         timestamps: true
