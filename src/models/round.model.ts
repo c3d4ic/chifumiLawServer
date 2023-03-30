@@ -1,11 +1,11 @@
-import { model } from "mongoose";
+import Action from "./action.model";
 
 const mongoose = require('mongoose');
 
 const roundSchema = mongoose.Schema(
     {
-        player: { type: mongoose.Schema.Types.ObjectId, ref: 'Player', required: true },
-        actions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Action', required: true },]
+        "winner": { type: mongoose.Schema.Types.ObjectId, ref: 'Player', required: true },
+        "actions": [ Action ]
     },
 )
 

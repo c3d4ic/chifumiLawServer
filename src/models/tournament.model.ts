@@ -1,5 +1,4 @@
-import { model } from "mongoose";
-import { Player } from "../player";
+import Game from "../game";
 
 const mongoose = require('mongoose');
 
@@ -11,7 +10,7 @@ const tournamentSchema = mongoose.Schema(
         },
         players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }],
         admin: { type: mongoose.Schema.Types.ObjectId, ref: 'Player', required: true },
-        games: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Game' }],
+        games: [Game],
     },
     {
         timestamps: true
